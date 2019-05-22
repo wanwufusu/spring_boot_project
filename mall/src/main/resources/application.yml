@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: alpha
+---
+server:
+  servlet:
+    context-path: /
+  port: 8088
+spring:
+  profiles: alpha
+  datasource:
+    url: jdbc:mysql://182.61.60.156:3306/ssm_project?serverTimezone=GMT&allowPublicKeyRetrieval=true
+    username: user22
+    password: Abc123456+
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
