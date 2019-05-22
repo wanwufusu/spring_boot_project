@@ -1,8 +1,6 @@
 package com.springboot.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -14,8 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 1.0.0
  */
 @RestController
-public class TestController {
-
+public class MainController {
     @RequestMapping("hello")
     public String testHello(){
         return "hello";
