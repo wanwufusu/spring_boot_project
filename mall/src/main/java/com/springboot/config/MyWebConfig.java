@@ -20,7 +20,7 @@ import java.util.ArrayList;
 @Configuration
 public class MyWebConfig extends WebMvcConfigurationSupport {
 
-    @Bean
+/*    @Bean
     public FilterRegistrationBean filterRegistrationBean(){
         FilterRegistrationBean<Filter> filterFilterRegistrationBean = new FilterRegistrationBean<>();
         filterFilterRegistrationBean.setFilter(new CorsFilter());
@@ -28,5 +28,5 @@ public class MyWebConfig extends WebMvcConfigurationSupport {
         url.add("/*");
         filterFilterRegistrationBean.setUrlPatterns(url);
         return filterFilterRegistrationBean;
-    }
+    }*/
 }
