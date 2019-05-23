@@ -1,7 +1,7 @@
 package com.springboot.controller.popularize;
 
-import com.springboot.bean.PageDetail;
-import com.springboot.bean.ResponseVO;
+import com.springboot.bean.util.PageDetail;
+import com.springboot.bean.util.ResponseVO;
 import com.springboot.service.popularize.GrouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

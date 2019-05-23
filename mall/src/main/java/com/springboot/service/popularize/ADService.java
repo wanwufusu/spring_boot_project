@@ -1,10 +1,7 @@
 package com.springboot.service.popularize;
 
-import com.springboot.bean.PageDetail;
-import com.springboot.bean.Result;
-import com.springboot.bean.popularize.MallAd;
-
-import java.util.List;
+import com.springboot.bean.util.PageDetail;
+import com.springboot.bean.util.Result;
 
 public interface ADService {
 

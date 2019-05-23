@@ -1,7 +1,7 @@
 package com.springboot.service.popularize.Impl;
 
-import com.springboot.bean.PageDetail;
-import com.springboot.bean.Result;
+import com.springboot.bean.util.PageDetail;
+import com.springboot.bean.util.Result;
 import com.springboot.mapper.popularize.CouponMapper;
 import com.springboot.service.popularize.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
