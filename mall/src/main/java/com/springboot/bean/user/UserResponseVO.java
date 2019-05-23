@@ -4,7 +4,7 @@ import java.util.List;
 
 public class UserResponseVO<T> {
     private int errno;
-    private List<T> data;
+    private T data;
     private String errmsg;
 
     public int getErrno() {
@@ -15,11 +15,11 @@ public class UserResponseVO<T> {
         this.errno = errno;
     }
 
-    public List<T> getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(List<T> data) {
+    public void setData(T data) {
         this.data = data;
     }
 
@@ -30,4 +30,5 @@ public class UserResponseVO<T> {
     public void setErrmsg(String errmsg) {
         this.errmsg = errmsg;
     }
+
 }

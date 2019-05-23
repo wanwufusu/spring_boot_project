@@ -7,9 +7,11 @@ import com.springboot.mapper.user.UserMapper;
 
 import com.springboot.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
@@ -21,6 +23,12 @@ public class UserServiceImpl implements UserService {
         int offset = userPage.getOffset();
         String order = userPage.getOrder();
         String sort = userPage.getSort();
-        return userMapper.QueryUsersByPage(limit,offset,sort,order);
+        List<User> users = userMapper.QueryUsersByPage(offset, limit, sort, order);
+        return users;
+    }
+
+    @Override
+    public int findCount() {
+        return userMapper.findCount();
     }
 }

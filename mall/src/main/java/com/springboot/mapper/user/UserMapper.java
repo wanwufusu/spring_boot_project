@@ -10,7 +10,9 @@ import java.util.List;
 
 public interface UserMapper {
 
-    User selectByPrimaryKey(@Param("id") Integer id);
-
+    /*User selectByPrimaryKey(@Param("id") Integer id);*/
+//按某列增序分页查询
     List<User> QueryUsersByPage(@Param("offset") int offset,@Param("limit") int limit,@Param("sort")String sort,@Param("order")String order);
+
+    int findCount();
 }
