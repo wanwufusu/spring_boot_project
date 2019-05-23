@@ -2,25 +2,21 @@ package com.springboot.controller.popularize;
 
 import com.springboot.bean.util.PageDetail;
 import com.springboot.bean.util.ResponseVO;
-import com.springboot.service.popularize.ADService;
+import com.springboot.service.popularize.GrouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-
+@RequestMapping("groupon")
 @Controller
-@RequestMapping("ad")
-public class ADController {
-
+public class GrouponController {
     @Autowired
-    ADService adService;
+    GrouponService service;
 
     @RequestMapping("list")
     @ResponseBody
-    public ResponseVO adList(PageDetail pageDetail){
-        ResponseVO response = new ResponseVO(adService.findList(pageDetail), "内容", 0);
-        return response;
+    public ResponseVO grouponList(PageDetail pageDetail){
+        return new ResponseVO(service.findList(pageDetail),"成功",0);
     }
 }

@@ -1,26 +1,27 @@
 package com.springboot.controller.popularize;
 
+
 import com.springboot.bean.util.PageDetail;
 import com.springboot.bean.util.ResponseVO;
-import com.springboot.service.popularize.ADService;
+import com.springboot.bean.util.Result;
+import com.springboot.service.popularize.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-
 @Controller
-@RequestMapping("ad")
-public class ADController {
+@RequestMapping("coupon")
+public class CouponController {
 
     @Autowired
-    ADService adService;
+    CouponService service;
 
     @RequestMapping("list")
     @ResponseBody
-    public ResponseVO adList(PageDetail pageDetail){
-        ResponseVO response = new ResponseVO(adService.findList(pageDetail), "内容", 0);
-        return response;
+    public ResponseVO couponlist(PageDetail pageDetail){
+        Result result = service.findlist(pageDetail);
+        ResponseVO vo = new ResponseVO(result, "成功", 0);
+        return vo;
     }
 }
