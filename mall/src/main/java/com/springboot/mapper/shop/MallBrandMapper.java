@@ -1,6 +1,6 @@
 package com.springboot.mapper.shop;
 
-import com.springboot.bean.PageDetail;
+import com.springboot.bean.util.PageDetail;
 import com.springboot.bean.shop.MallBrand;
 import org.apache.ibatis.annotations.Param;
 

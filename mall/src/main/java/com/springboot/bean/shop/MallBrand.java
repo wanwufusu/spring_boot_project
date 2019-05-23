@@ -2,21 +2,26 @@ package com.springboot.bean.shop;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class MallBrand {
     private Integer id;
 
+    @NotNull(message = "参数错误")
     private String name;
 
+    @NotNull(message = "参数错误")
     private String desc;
 
+    @NotNull(message = "参数错误")
     private String picUrl;
 
     private Byte sortOrder;
 
     @Min(value = 0, message = "参数错误")
+    @NotNull(message = "参数错误")
     private BigDecimal floorPrice;
 
     private Date addTime;

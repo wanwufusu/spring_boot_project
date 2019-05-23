@@ -1,13 +1,14 @@
 package com.springboot.controller.shop;
 
-import com.springboot.bean.PageDetail;
-import com.springboot.bean.ResponseVO;
-import com.springboot.bean.Result;
+import com.springboot.bean.util.PageDetail;
+import com.springboot.bean.util.ResponseVO;
+import com.springboot.bean.util.Result;
 import com.springboot.bean.shop.MallBrand;
 import com.springboot.service.shop.ShopBrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,18 +39,23 @@ public class ShopBrandController {
     }
 
     @RequestMapping("create")
-    public ResponseVO<MallBrand> creatBrand(@RequestBody MallBrand mallBrand, BindingResult bindingResult){
+    public ResponseVO<MallBrand> creatBrand(@RequestBody @Validated MallBrand mallBrand, BindingResult bindingResult){
 
+        ResponseVO<MallBrand> responseVO = new ResponseVO<>();
         if (bindingResult.hasErrors()) {
             FieldError fieldError = bindingResult.getFieldError();
             String defaultMessage = fieldError.getDefaultMessage();
-            String code = fieldError.getCode();
-            ResponseVO<MallBrand> responseVO = new ResponseVO<>();
             responseVO.setErrmsg(defaultMessage);
-            responseVO.setErrno(Integer.parseInt(code));
-            return responseVO;
+            responseVO.setErrno(402);
         }
-        else return null;
+        else {
+            int i = shopBrandService.insertBrand(mallBrand);
+            if (i > 0) {
+                responseVO.setData(mallBrand);
+                responseVO.setSuccessMsg();
+            }
+        }
+        return responseVO;
     }
 
 

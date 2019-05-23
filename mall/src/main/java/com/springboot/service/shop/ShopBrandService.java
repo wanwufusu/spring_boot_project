@@ -1,8 +1,8 @@
 package com.springboot.service.shop;
 
-import com.springboot.bean.PageDetail;
-import com.springboot.bean.ResponseVO;
-import com.springboot.bean.Result;
+import com.springboot.bean.util.PageDetail;
+import com.springboot.bean.util.ResponseVO;
+import com.springboot.bean.util.Result;
 import com.springboot.bean.shop.MallBrand;
 
 public interface ShopBrandService {
@@ -13,4 +13,5 @@ public interface ShopBrandService {
      */
     ResponseVO<Result<MallBrand>> selectPageBrand(PageDetail pageDetail);
 
+    int insertBrand(MallBrand mallBrand);
 }

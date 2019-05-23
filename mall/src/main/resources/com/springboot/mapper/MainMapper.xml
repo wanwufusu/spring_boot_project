@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.mapper.MainMapper">
+    <resultMap id="BaseResultMap" type="com.springboot.bean.MallStorage">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="key" jdbcType="VARCHAR" property="key" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="type" jdbcType="VARCHAR" property="type" />
+        <result column="size" jdbcType="INTEGER" property="size" />
+        <result column="url" jdbcType="VARCHAR" property="url" />
+        <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="deleted" jdbcType="BIT" property="deleted" />
+    </resultMap>
+    <insert id="insertStorage" parameterType="com.springboot.bean.MallStorage" useGeneratedKeys="true" keyProperty="id">
+    insert into cskaoyan_mall_storage (`key`, `name`,
+      `type`, `size`, url, add_time,
+      update_time, deleted)
+    values (#{key,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{type,jdbcType=VARCHAR}, #{size,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, now(),
+      #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT})
+  </insert>
+</mapper>
