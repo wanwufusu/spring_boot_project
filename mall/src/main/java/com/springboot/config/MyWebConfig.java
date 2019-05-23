@@ -1,6 +1,5 @@
 package com.springboot.config;
 
-import com.springboot.filter.CorsFilter;
 import org.hibernate.validator.HibernateValidator;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -39,7 +38,7 @@ public class MyWebConfig extends WebMvcConfigurationSupport {
      * 文件上传注册
      * @return
      */
-    @Bean(name = "multipartResolver")
+    @Bean("multipartResolver")
     public CommonsMultipartResolver commonsMultipartResolver(){
         CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
         commonsMultipartResolver.setMaxUploadSize(4194304);

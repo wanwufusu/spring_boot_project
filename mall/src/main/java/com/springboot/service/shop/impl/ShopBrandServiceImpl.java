@@ -1,8 +1,8 @@
 package com.springboot.service.shop.impl;
 
-import com.springboot.bean.PageDetail;
-import com.springboot.bean.ResponseVO;
-import com.springboot.bean.Result;
+import com.springboot.bean.util.PageDetail;
+import com.springboot.bean.util.ResponseVO;
+import com.springboot.bean.util.Result;
 import com.springboot.bean.shop.MallBrand;
 import com.springboot.mapper.shop.MallBrandMapper;
 import com.springboot.service.shop.ShopBrandService;
@@ -32,5 +32,10 @@ public class ShopBrandServiceImpl implements ShopBrandService{
         responseVO.setData(result);
         responseVO.setSuccessMsg();
         return responseVO;
+    }
+
+    @Override
+    public int insertBrand(MallBrand mallBrand) {
+        return mallBrandMapper.insert(mallBrand);
     }
 }
