@@ -11,7 +11,10 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
 
 /**
  * 〈一句话功能简述〉<br>
@@ -34,8 +37,11 @@ public class ShopBrandController {
      * @return
      */
     @RequestMapping("list")
-    public ResponseVO<Result<MallBrand>> selectPageBrand(PageDetail pageDetail){
-        return shopBrandService.selectPageBrand(pageDetail);
+    public ResponseVO<Result<MallBrand>> selectPageBrand(PageDetail pageDetail, String id, String name){
+        HashMap<String, Object> conditions = new HashMap<>();
+        conditions.put("id", id);
+        conditions.put("name", name);
+        return shopBrandService.selectPageBrandByConditions(pageDetail, conditions);
     }
 
     @RequestMapping("create")
@@ -58,5 +64,25 @@ public class ShopBrandController {
         return responseVO;
     }
 
+    @RequestMapping("delete")
+    public ResponseVO<MallBrand> deleted(@RequestBody MallBrand mallBrand){
+        shopBrandService.deleteBrandById(mallBrand.getId());
+        ResponseVO<MallBrand> responseVO = new ResponseVO<>();
+        responseVO.setSuccessMsg();
+        return responseVO;
+    }
 
+    @RequestMapping("update")
+    public ResponseVO<MallBrand> updateBrand(@RequestBody MallBrand mallBrand){
+        int i = shopBrandService.update(mallBrand);
+        ResponseVO<MallBrand> responseVO = new ResponseVO<>();
+        if (i > 0) {
+            responseVO.setSuccessMsg();
+            responseVO.setData(mallBrand);
+        } else {
+            responseVO.setErrno(999);
+            responseVO.setErrmsg("失败");
+        }
+        return responseVO;
+    }
 }
