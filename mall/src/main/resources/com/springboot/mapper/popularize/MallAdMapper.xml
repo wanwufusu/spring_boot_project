@@ -30,6 +30,19 @@
     select count(id) from cskaoyan_mall_ad
   </select>
 
+  <insert id="insert" >
+    insert into cskaoyan_mall_ad (id, name, link,
+      url, position, content,
+      start_time, end_time, enabled,
+      add_time, update_time, deleted
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR},
+      #{url,jdbcType=VARCHAR}, #{position,jdbcType=TINYINT}, #{content,jdbcType=VARCHAR},
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{enabled,jdbcType=BIT},
+      now(), now(), #{deleted,jdbcType=BIT}
+      )
+  </insert>
+
 
 
 
@@ -67,7 +80,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
 
-  <insert id="insert" parameterType="com.springboot.bean.popularize.MallAd">
+<!--  <insert id="insert" parameterType="com.springboot.bean.popularize.MallAd">
     insert into cskaoyan_mall_ad (id, name, link, 
       url, position, content, 
       start_time, end_time, enabled, 
@@ -78,7 +91,7 @@
       #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{enabled,jdbcType=BIT}, 
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
-  </insert>
+  </insert>-->
 
   <insert id="insertSelective" parameterType="com.springboot.bean.popularize.MallAd">
     insert into cskaoyan_mall_ad

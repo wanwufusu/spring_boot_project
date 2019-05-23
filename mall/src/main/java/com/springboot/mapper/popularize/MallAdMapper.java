@@ -10,4 +10,5 @@ public interface MallAdMapper {
     List<MallAd> findList(@Param("offset") int offset,@Param("limit") int limit);
 
     int countList();
+    int insert (MallAd ad);
 }
