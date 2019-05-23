@@ -1,6 +1,6 @@
 package com.springboot.controller;
 
-import com.springboot.bean.ResponseMessage;
+import com.springboot.bean.ResponseVO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -52,7 +52,7 @@ public class MainController {
      */
     @RequestMapping("dashboard")
     @ResponseBody
-    public ResponseMessage dashBoard(){
-        return new ResponseMessage(0,"暂时没有东西","空");
+    public ResponseVO dashBoard(){
+        return new ResponseVO("暂时没有东西", "空", 0);
     }
 }
