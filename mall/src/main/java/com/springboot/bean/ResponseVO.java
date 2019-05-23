@@ -11,25 +11,25 @@ import java.util.List;
  * @since 1.0.0
  */
 
-public class ListResponseVO<T> {
-    private List<T> data;
+public class ResponseVO<T> {
+    private T data;
     private String errmsg;
     private int errno;
 
-    public ListResponseVO() {
+    public ResponseVO() {
     }
 
-    public ListResponseVO(List<T> data, String errmsg, int errno) {
+    public ResponseVO(T data, String errmsg, int errno) {
         this.data = data;
         this.errmsg = errmsg;
         this.errno = errno;
     }
 
-    public List<T> getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(List<T> data) {
+    public void setData(T data) {
         this.data = data;
     }
 
@@ -47,5 +47,19 @@ public class ListResponseVO<T> {
 
     public void setErrno(int errno) {
         this.errno = errno;
+    }
+
+    @Override
+    public String toString() {
+        return "ResponseVO{" +
+                "data=" + data +
+                ", errmsg='" + errmsg + '\'' +
+                ", errno=" + errno +
+                '}';
+    }
+
+    public void setSuccessMsg(){
+        this.errmsg = "成功";
+        this.errno = 0;
     }
 }

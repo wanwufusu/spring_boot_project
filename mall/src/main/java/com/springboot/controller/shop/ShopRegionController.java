@@ -1,6 +1,6 @@
 package com.springboot.controller.shop;
 
-import com.springboot.bean.ListResponseVO;
+import com.springboot.bean.ResponseVO;
 import com.springboot.bean.shop.MallRegion;
 import com.springboot.service.shop.ShopRegionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +27,9 @@ public class ShopRegionController {
     ShopRegionService shopRegionService;
 
     @RequestMapping("region/list")
-    public ListResponseVO<MallRegion> queryRegions(){
+    public ResponseVO<List<MallRegion>> queryRegions(){
         List<MallRegion> mallRegions = shopRegionService.queryAllRegions();
-        return new ListResponseVO<>(mallRegions, "成功", 0);
+        return new ResponseVO<List<MallRegion>>(mallRegions, "成功", 0);
     }
 
 

@@ -12,23 +12,23 @@ import java.util.List;
  */
 
 public class Result<T> {
-    private List<T> rows;
+    private List<T> items;
     private int total;
 
     public Result() {
     }
 
-    public Result(List<T> rows, int total) {
-        this.rows = rows;
+    public Result(List<T> items, int total) {
+        this.items = items;
         this.total = total;
     }
 
-    public List<T> getRows() {
-        return rows;
+    public List<T> getItems() {
+        return items;
     }
 
-    public void setRows(List<T> rows) {
-        this.rows = rows;
+    public void setItems(List<T> items) {
+        this.items = items;
     }
 
     public int getTotal() {
