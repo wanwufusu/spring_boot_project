@@ -29,23 +29,58 @@
     ORDER BY ${pageDetail.sort} ${pageDetail.order}
     limit #{pageDetail.limit} offset #{pageDetail.offset}
   </select>
+  <select id="selectByPageDetailAndConditions" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cskaoyan_mall_brand
+    <where>
+      deleted = 0
+      <if test="conditions.id != null">
+        and id = #{conditions.id}
+      </if>
+      <if test="conditions.name != null">
+        and name like CONCAT('%', #{conditions.name}, '%')
+      </if>
+    </where>
+    ORDER BY ${pageDetail.sort} ${pageDetail.order}
+    limit #{pageDetail.limit} offset #{pageDetail.offset}
+  </select>
   <select id="selectAllRecords" parameterType="java.lang.Integer" resultType="_int">
     select
     count(*)
     from cskaoyan_mall_brand
   </select>
+  <select id="selectAllRecordsByConditions" parameterType="java.lang.Integer" resultType="_int">
+    select
+    count(*)
+    from cskaoyan_mall_brand
+    <where>
+      deleted = 0
+      <if test="conditions.id != null">
+        and id = #{conditions.id}
+      </if>
+      <if test="conditions.name != null">
+        and name like CONCAT('%', #{conditions.name}, '%')
+      </if>
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cskaoyan_mall_brand
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.springboot.bean.shop.MallBrand">
-    insert into cskaoyan_mall_brand (id, name, desc, 
+  <update id="logicDeleteBrandById">
+    update cskaoyan_mall_brand
+    set deleted = true
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insert" parameterType="com.springboot.bean.shop.MallBrand" useGeneratedKeys="true" keyProperty="id">
+    insert into cskaoyan_mall_brand (name, `desc`,
       pic_url, sort_order, floor_price, 
       add_time, update_time, deleted
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
+    values (#{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR},
       #{picUrl,jdbcType=VARCHAR}, #{sortOrder,jdbcType=TINYINT}, #{floorPrice,jdbcType=DECIMAL}, 
-      #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
+      now(), now(), 0
       )
   </insert>
   <insert id="insertSelective" parameterType="com.springboot.bean.shop.MallBrand">
@@ -141,13 +176,13 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.springboot.bean.shop.MallBrand">
     update cskaoyan_mall_brand
-    set name = #{name,jdbcType=VARCHAR},
-      desc = #{desc,jdbcType=VARCHAR},
+    set `name` = #{name,jdbcType=VARCHAR},
+      `desc` = #{desc,jdbcType=VARCHAR},
       pic_url = #{picUrl,jdbcType=VARCHAR},
       sort_order = #{sortOrder,jdbcType=TINYINT},
       floor_price = #{floorPrice,jdbcType=DECIMAL},
       add_time = #{addTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_time = now(),
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>

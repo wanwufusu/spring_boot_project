@@ -1,9 +1,11 @@
 package com.springboot.service.shop;
 
-import com.springboot.bean.PageDetail;
-import com.springboot.bean.ResponseVO;
-import com.springboot.bean.Result;
+import com.springboot.bean.util.PageDetail;
+import com.springboot.bean.util.ResponseVO;
+import com.springboot.bean.util.Result;
 import com.springboot.bean.shop.MallBrand;
+
+import java.util.Map;
 
 public interface ShopBrandService {
     /**
@@ -11,6 +13,11 @@ public interface ShopBrandService {
      * @param pageDetail 页面信息
      * @return 返回一个VO，包含品牌商集合，总数量及操作状态
      */
-    ResponseVO<Result<MallBrand>> selectPageBrand(PageDetail pageDetail);
+    ResponseVO<Result<MallBrand>> selectPageBrandByConditions(PageDetail pageDetail, Map conditions);
 
+    int insertBrand(MallBrand mallBrand);
+
+    void deleteBrandById(Integer id);
+
+    int update(MallBrand mallBrand);
 }

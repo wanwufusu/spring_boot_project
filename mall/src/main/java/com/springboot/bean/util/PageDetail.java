@@ -1,4 +1,4 @@
-package com.springboot.bean;
+package com.springboot.bean.util;
 
 /**
  * 〈一句话功能简述〉<br>

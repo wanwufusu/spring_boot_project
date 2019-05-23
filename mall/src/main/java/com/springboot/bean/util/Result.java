@@ -1,4 +1,4 @@
-package com.springboot.bean;
+package com.springboot.bean.util;
 
 import java.util.List;
 
