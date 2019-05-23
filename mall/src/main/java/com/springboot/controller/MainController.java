@@ -1,7 +1,9 @@
 package com.springboot.controller;
 
+import com.springboot.bean.ResponseVO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.reflect.Array;
@@ -42,6 +44,15 @@ public class MainController {
         loginToken.put("errmsg", "成功");
         loginToken.put("errno", 0);
         return loginToken;
+    }
 
+    /**
+     * 空的仪表盘，为了让它不报错
+     * @return
+     */
+    @RequestMapping("dashboard")
+    @ResponseBody
+    public ResponseVO dashBoard(){
+        return new ResponseVO("暂时没有东西", "空", 0);
     }
 }

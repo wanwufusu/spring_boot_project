@@ -7,6 +7,28 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="type" jdbcType="TINYINT" property="type" />
     <result column="code" jdbcType="INTEGER" property="code" />
+    <collection property="children" column="id" select="com.springboot.mapper.shop.MallRegionMapper.selectByPid"/>
+  </resultMap>
+  <resultMap id="TestResultMap" type="com.springboot.bean.shop.MallRegion">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="code" jdbcType="INTEGER" property="code" />
+    <collection property="children" ofType="com.springboot.bean.shop.MallRegion">
+      <id column="sid" jdbcType="INTEGER" property="id" />
+      <result column="spid" jdbcType="INTEGER" property="pid" />
+      <result column="sname" jdbcType="VARCHAR" property="name" />
+      <result column="stype" jdbcType="TINYINT" property="type" />
+      <result column="scode" jdbcType="INTEGER" property="code" />
+      <collection property="children" ofType="com.springboot.bean.shop.MallRegion">
+        <id column="tid" jdbcType="INTEGER" property="id" />
+        <result column="tpid" jdbcType="INTEGER" property="pid" />
+        <result column="tname" jdbcType="VARCHAR" property="name" />
+        <result column="ttype" jdbcType="TINYINT" property="type" />
+        <result column="tcode" jdbcType="INTEGER" property="code" />
+      </collection>
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
     id, pid, name, type, code
@@ -16,6 +38,16 @@
     <include refid="Base_Column_List" />
     from cskaoyan_mall_region
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllRegions" parameterType="java.lang.Integer" resultMap="TestResultMap">
+    select
+    f.id, f.pid, f.name, f.type, f.code,
+    s.id sid, s.pid spid, s.name sname, s.type stype, s.code scode,
+    t.id tid, t.pid tpid, t.name tname, t.type ttype, t.code tcode
+    from cskaoyan_mall_region f, cskaoyan_mall_region s, cskaoyan_mall_region t
+    where f.type = 1 and s.type = 2 and t.type = 3
+    and f.id = s.pid
+    and s.id = t.pid;
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cskaoyan_mall_region
