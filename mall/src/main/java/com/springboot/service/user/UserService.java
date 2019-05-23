@@ -9,4 +9,8 @@ public interface UserService {
     List<User> queryUser(UserPage userPage);
 
     int findCount();
+
+    List<User> queryUserByMobile(String mobile,UserPage userPage);
+
+    List<User> queryUserByUsername(String username,UserPage userPage);
 }

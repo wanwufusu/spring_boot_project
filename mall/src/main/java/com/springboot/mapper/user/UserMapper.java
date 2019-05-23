@@ -15,4 +15,8 @@ public interface UserMapper {
     List<User> QueryUsersByPage(@Param("offset") int offset,@Param("limit") int limit,@Param("sort")String sort,@Param("order")String order);
 
     int findCount();
+
+    List<User> QueryUsersByMobile(@Param("mobile")String mobile,@Param("offset") int offset,@Param("limit") int limit,@Param("sort")String sort,@Param("order")String order);
+
+    List<User> QueryUsersByUsername(@Param("username")String username,@Param("offset") int offset,@Param("limit") int limit,@Param("sort")String sort,@Param("order")String order);
 }

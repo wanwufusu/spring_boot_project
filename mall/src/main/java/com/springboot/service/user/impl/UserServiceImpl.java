@@ -31,4 +31,22 @@ public class UserServiceImpl implements UserService {
     public int findCount() {
         return userMapper.findCount();
     }
+
+    @Override
+    public List<User> queryUserByMobile(String mobile,UserPage userPage) {
+        int limit = userPage.getLimit();
+        int offset = userPage.getOffset();
+        String order = userPage.getOrder();
+        String sort = userPage.getSort();
+        return userMapper.QueryUsersByMobile(mobile,offset, limit, sort, order);
+    }
+
+    @Override
+    public List<User> queryUserByUsername(String username,UserPage userPage) {
+        int limit = userPage.getLimit();
+        int offset = userPage.getOffset();
+        String order = userPage.getOrder();
+        String sort = userPage.getSort();
+        return userMapper.QueryUsersByUsername(username,offset, limit, sort, order);
+    }
 }

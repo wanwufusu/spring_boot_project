@@ -27,7 +27,15 @@ public class UserController {
         UserResponseVO<UserData> responseVO = new UserResponseVO<>();
         int offset = (userPage.getPage()-1)*userPage.getLimit();
         userPage.setOffset(offset);
-        List<User> list = userService.queryUser(userPage);
+        List<User> list=null;
+        if(username==null&&mobile==null){
+             list = userService.queryUser(userPage);
+        }else if(username==null&&mobile!=null){
+            list = userService.queryUserByMobile(mobile,userPage);
+        }else{
+            list = userService.queryUserByUsername(username,userPage);
+        }
+
         int count = userService.findCount();
         UserData<User> userUserData = new UserData<User>(count,list);
         if(list!=null){

@@ -25,6 +25,12 @@
     <select id="QueryUsersByPage" resultMap="BaseResultMap">
         select <include refid="Base_Column_List" /> from cskaoyan_mall_user order by ${sort} ${order} limit #{offset},#{limit}
     </select>
+    <select id="QueryUsersByMobile" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from cskaoyan_mall_user where mobile like "%"#{mobile}"%" order by ${sort} ${order} limit #{offset},#{limit}
+    </select>
+    <select id="QueryUsersByUsername" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from cskaoyan_mall_user where username="%"#{username}"%" order by ${sort} ${order} limit #{offset},#{limit}
+    </select>
     <select id="findCount" resultType="_int">
         select count(*) from cskaoyan_mall_user
     </select>
