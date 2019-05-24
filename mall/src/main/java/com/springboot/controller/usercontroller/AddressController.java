@@ -28,6 +28,7 @@ public class AddressController {
         List<Address> list= addressService.queryAddress(userPage,userId,name);
         int count = addressService.findCount();
         UserData<Address> addressUserData = new UserData<Address>(count,list);
+        //重复代码过多
         if(list!=null){
             responseVO.setErrno(0);
             responseVO.setData(addressUserData);
