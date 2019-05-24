@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("ad")
-public class ADController {
+public class AdController {
 
     @Autowired
     ADService adService;
