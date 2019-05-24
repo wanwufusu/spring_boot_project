@@ -37,8 +37,8 @@ public class UpLoadUtil {
         filename = stringBuilder.toString();
         mallStorage.setKey(filename);
         //String realPath = request.getSession().getServletContext().getContextPath();
-        String path = ResourceUtils.getURL("classpath:").getPath() + "/storage/" + filename;
-        //Path path1 = Paths.get("/storage", filename);
+        //String path = ResourceUtils.getURL("classpath:").getPath() + "/storage/" + filename;
+        Path path = Paths.get("E:/storage", filename);
         mallStorage.setDeleted(false);
         //String realPath = "upload/";
         File newFile = new File(path.toString());
