@@ -1,12 +1,6 @@
 package com.springboot.controller.usercontroller;
 
-
-import com.alibaba.druid.sql.dialect.oracle.ast.clause.ModelClause;
-import com.springboot.bean.user.User;
-import com.springboot.bean.user.UserData;
-import com.springboot.bean.user.UserPage;
-import com.springboot.bean.user.UserResponseVO;
-
+import com.springboot.bean.user.*;
 import com.springboot.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +14,7 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
+    //--------------------------------会员管理------------------------------------------------------------------------
 
     @RequestMapping("user/list")
     @ResponseBody
@@ -43,12 +38,10 @@ public class UserController {
             responseVO.setData(userUserData);
             responseVO.setErrmsg("成功");
         }else{
-            responseVO.setErrno(1);
+            responseVO.setErrno(502);
             responseVO.setData(userUserData);
-            responseVO.setErrmsg("失败");
+            responseVO.setErrmsg("系统内部错误");
         }
         return responseVO;
-
     }
-
 }
