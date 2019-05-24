@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.springboot.mapper.popularize.MallAdMapper">
   <resultMap id="BaseResultMap" type="com.springboot.bean.popularize.MallAd">
     <id column="id" jdbcType="INTEGER" property="id" />
@@ -23,13 +24,71 @@
 
   <select id="findList" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>
-    from cskaoyan_mall_ad limit #{offset},#{limit}
+    from cskaoyan_mall_ad order by #{sort} #{order} limit #{offset},#{limit}
   </select>
 
   <select id="countList" resultType="_int">
     select count(id) from cskaoyan_mall_ad
   </select>
 
+  <!--把产生的主键返回到MallAd的id属性-->
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.springboot.bean.popularize.MallAd" >
+    insert into cskaoyan_mall_ad (id, name, link,
+      url, position, content,
+      start_time, end_time, enabled,
+      add_time, update_time, deleted
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR},
+      #{url,jdbcType=VARCHAR}, #{position,jdbcType=TINYINT}, #{content,jdbcType=VARCHAR},
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{enabled,jdbcType=BIT},
+      now(), now(), #{deleted,jdbcType=BIT}
+      )
+  </insert>
+
+  <update id="update" useGeneratedKeys="true" keyProperty="id" parameterType="com.springboot.bean.popularize.MallAd">
+    update cskaoyan_mall_ad
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null">
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=TINYINT},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=BIT},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = now(),
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from cskaoyan_mall_ad
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
 
 
 
@@ -51,9 +110,7 @@
 
 
 
-
-
-
+<!--
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -62,23 +119,9 @@
   </select>
 
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from cskaoyan_mall_ad
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
 
-  <insert id="insert" parameterType="com.springboot.bean.popularize.MallAd">
-    insert into cskaoyan_mall_ad (id, name, link, 
-      url, position, content, 
-      start_time, end_time, enabled, 
-      add_time, update_time, deleted
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, 
-      #{url,jdbcType=VARCHAR}, #{position,jdbcType=TINYINT}, #{content,jdbcType=VARCHAR}, 
-      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{enabled,jdbcType=BIT}, 
-      #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
-      )
-  </insert>
+
+
 
   <insert id="insertSelective" parameterType="com.springboot.bean.popularize.MallAd">
     insert into cskaoyan_mall_ad
@@ -160,45 +203,6 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.bean.popularize.MallAd">
-    update cskaoyan_mall_ad
-    <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="link != null">
-        link = #{link,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null">
-        url = #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="position != null">
-        position = #{position,jdbcType=TINYINT},
-      </if>
-      <if test="content != null">
-        content = #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="startTime != null">
-        start_time = #{startTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endTime != null">
-        end_time = #{endTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="enabled != null">
-        enabled = #{enabled,jdbcType=BIT},
-      </if>
-      <if test="addTime != null">
-        add_time = #{addTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deleted != null">
-        deleted = #{deleted,jdbcType=BIT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
 
   <update id="updateByPrimaryKey" parameterType="com.springboot.bean.popularize.MallAd">
     update cskaoyan_mall_ad
@@ -214,6 +218,6 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
-  </update>
+  </update>-->
 
 </mapper>

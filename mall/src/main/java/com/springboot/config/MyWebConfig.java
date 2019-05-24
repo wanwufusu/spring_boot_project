@@ -21,8 +21,7 @@ import java.util.ArrayList;
  * @since 1.0.0
  */
 @Configuration
-public class MyWebConfig extends WebMvcConfigurationSupport {
-
+public class MyWebConfig {
 /*    @Bean
     public FilterRegistrationBean filterRegistrationBean(){
         FilterRegistrationBean<Filter> filterFilterRegistrationBean = new FilterRegistrationBean<>();
@@ -32,8 +31,6 @@ public class MyWebConfig extends WebMvcConfigurationSupport {
         filterFilterRegistrationBean.setUrlPatterns(url);
         return filterFilterRegistrationBean;
     }*/
-
-
     /**
      * 文件上传注册
      * @return

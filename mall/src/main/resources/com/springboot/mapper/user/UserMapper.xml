@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.mapper.user.UserMapper">
+    <resultMap id="BaseResultMap" type="com.springboot.bean.user.User">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="gender" jdbcType="TINYINT" property="gender" />
+        <result column="birthday" jdbcType="DATE" property="birthday" />
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+        <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
+        <result column="user_level" jdbcType="TINYINT" property="userLevel" />
+        <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+        <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+        <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+        <result column="weixin_openid" jdbcType="VARCHAR" property="weixinOpenid" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+        <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="deleted" jdbcType="BIT" property="deleted" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,username,mobile,gender,birthday,user_level,status,password,last_login_time,last_login_ip,nickname,weixin_openid,avatar,add_time,update_time,deleted
+    </sql>
+    <select id="QueryUsersByPage" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from cskaoyan_mall_user order by ${sort} ${order} limit #{offset},#{limit}
+    </select>
+    <select id="QueryUsersByMobile" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from cskaoyan_mall_user where mobile like "%"#{mobile}"%" order by ${sort} ${order} limit #{offset},#{limit}
+    </select>
+    <select id="QueryUsersByUsername" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from cskaoyan_mall_user where username like "%"#{username}"%" order by ${sort} ${order} limit #{offset},#{limit}
+    </select>
+    <select id="findCount" resultType="_int">
+        select count(*) from cskaoyan_mall_user
+    </select>
+</mapper>

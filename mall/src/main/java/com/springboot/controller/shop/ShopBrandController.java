@@ -80,7 +80,7 @@ public class ShopBrandController {
             responseVO.setSuccessMsg();
             responseVO.setData(mallBrand);
         } else {
-            responseVO.setErrno(999);
+            responseVO.setErrno(-1);
             responseVO.setErrmsg("失败");
         }
         return responseVO;
