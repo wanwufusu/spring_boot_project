@@ -181,9 +181,7 @@
       pic_url = #{picUrl,jdbcType=VARCHAR},
       sort_order = #{sortOrder,jdbcType=TINYINT},
       floor_price = #{floorPrice,jdbcType=DECIMAL},
-      add_time = #{addTime,jdbcType=TIMESTAMP},
-      update_time = now(),
-      deleted = #{deleted,jdbcType=BIT}
+      update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
