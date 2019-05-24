@@ -8,5 +8,9 @@ public interface ADService {
 
     Result findList(PageDetail pageDetail);
 
-    int add(MallAd ad);
+    MallAd add(MallAd ad);
+
+    MallAd update(MallAd ad);
+
+    int delete(MallAd ad);
 }

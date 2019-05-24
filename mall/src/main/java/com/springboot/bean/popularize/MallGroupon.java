@@ -2,7 +2,7 @@ package com.springboot.bean.popularize;
 
 import java.util.Date;
 
-public class mallgroupon {
+public class MallGroupon {
     private Integer id;
 
     private Integer orderId;

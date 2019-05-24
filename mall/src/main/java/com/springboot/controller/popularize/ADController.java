@@ -1,54 +1,52 @@
 package com.springboot.controller.popularize;
 
-import com.springboot.bean.popularize.MallTopic;
+
+import com.springboot.bean.popularize.MallAd;
 import com.springboot.bean.util.PageDetail;
 import com.springboot.bean.util.ResponseVO;
-import com.springboot.bean.util.Result;
-import com.springboot.service.popularize.TopicService;
+import com.springboot.service.popularize.ADService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@RequestMapping("ad")
 @RestController
-@RequestMapping("topic")
-public class TopicController {
-
+public class ADController {
     @Autowired
-    TopicService service;
+    ADService service;
 
     @RequestMapping("list")
-    @ResponseBody
-    public ResponseVO topiclist(PageDetail pageDetail){
-        Result result = service.findlist(pageDetail);
-        ResponseVO vo = new ResponseVO(result, "成功", 0);
-        return vo;
+    public ResponseVO grouponList(PageDetail pageDetail){
+        return new ResponseVO(service.findList(pageDetail),"成功",0);
     }
 
     @RequestMapping("create")
-    public ResponseVO create(@RequestBody MallTopic topic){
-        MallTopic add = service.add(topic);
+    public ResponseVO create(@RequestBody MallAd ad){
+        MallAd add = service.add(ad);
         if (add != null){
             return new ResponseVO(add,"成功",0);
         }else return new ResponseVO(null,"失败",-1);
     }
 
     @RequestMapping("update")
-    public ResponseVO update(@RequestBody MallTopic topic){
-        MallTopic update = service.update(topic);
+    public ResponseVO update(@RequestBody MallAd ad){
+        MallAd update = service.update(ad);
         if (update != null){
             return new ResponseVO(update,"成功",0);
         }else return new ResponseVO(null,"失败",-1);
     }
 
     @RequestMapping("delete")
-    public ResponseVO delete(@RequestBody MallTopic topic){
-        int i = service.delete(topic);
+    public ResponseVO delete(@RequestBody MallAd ad){
+        int i = service.delete(ad);
         if (i>=1){
             return new ResponseVO(null,"成功",0);
         }else {
             return new ResponseVO(null,"失败",-1);
         }
     }
+
 }

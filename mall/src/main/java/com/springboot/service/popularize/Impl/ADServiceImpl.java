@@ -19,13 +19,33 @@ public class ADServiceImpl implements ADService {
     @Override
     public Result findList(PageDetail pageDetail) {
         pageDetail.setOffset();
-        List list = mapper.findList(pageDetail.getOffset(), pageDetail.getLimit());
+        List list = mapper.findList(pageDetail);
         Result<Object> result = new Result<>(list,mapper.countList());
         return result;
     }
 
     @Override
-    public int add(MallAd ad) {
-        return  mapper.insert(ad);
+    public MallAd add(MallAd ad) {
+        int insert = mapper.insert(ad);
+        if (insert!=0){
+            ad.setId(insert);
+            return ad;
+        }else
+            return null;
+    }
+    @Override
+    public MallAd update(MallAd ad) {
+        int update = mapper.update(ad);
+        if (update!=0){
+            ad.setId(update);
+            return ad;
+        }else
+            return null;
+    }
+
+    @Override
+    public int delete(MallAd ad) {
+        Integer id = ad.getId();
+        return mapper.deleteById(id);
     }
 }
