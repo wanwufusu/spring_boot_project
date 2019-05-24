@@ -18,6 +18,7 @@
     <result column="ficon_url" jdbcType="VARCHAR" property="iconUrl" />
     <result column="fpic_url" jdbcType="VARCHAR" property="picUrl" />
     <result column="flevel" jdbcType="VARCHAR" property="level" />
+    <result column="fpid" jdbcType="VARCHAR" property="pid" />
     <collection property="children" ofType="com.springboot.bean.shop.MallCategory">
       <id column="sid" jdbcType="INTEGER" property="id" />
       <result column="sname" jdbcType="VARCHAR" property="name" />
@@ -26,6 +27,7 @@
       <result column="sicon_url" jdbcType="VARCHAR" property="iconUrl" />
       <result column="spic_url" jdbcType="VARCHAR" property="picUrl" />
       <result column="slevel" jdbcType="VARCHAR" property="level" />
+      <result column="spid" jdbcType="VARCHAR" property="pid" />
     </collection>
   </resultMap>
   <sql id="Base_Column_List">
@@ -43,10 +45,12 @@
     f.id fid, f.name fname, f.keywords fkeywords, f.desc fdesc, f.icon_url ficon_url, f.pic_url fpic_url,
     f.level flevel, f.sort_order fsort_order, f.pid fpid,
     s.id sid, s.name sname, s.keywords skeywords, s.desc sdesc, s.icon_url sicon_url, s.pic_url spic_url,
-    s.level slevel, s.sort_order ssort_order
+    s.level slevel, s.sort_order ssort_order, s.pid spid
     from cskaoyan_mall_category f, cskaoyan_mall_category s
     where f.level = 'L1' and s.level = 'L2'
     and f.id = s.pid
+    and f.deleted = 0
+    and s.deleted = 0
   </select>
   <select id="selectL1Categorys" resultType="com.springboot.bean.shop.CategoryName">
     select
@@ -57,16 +61,21 @@
     delete from cskaoyan_mall_category
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.springboot.bean.shop.MallCategory">
-    insert into cskaoyan_mall_category (id, name, keywords, 
-      desc, pid, icon_url, 
-      pic_url, level, sort_order, 
+  <update id="logicDeleteCategoryById">
+    update cskaoyan_mall_category
+    set deleted = true
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insert" parameterType="com.springboot.bean.shop.MallCategory" useGeneratedKeys="true" keyProperty="id">
+    insert into cskaoyan_mall_category (`name`, keywords,
+      `desc`, pid, icon_url,
+      pic_url, `level`, sort_order,
       add_time, update_time, deleted
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, 
+    values (#{name,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR},
       #{desc,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, #{iconUrl,jdbcType=VARCHAR}, 
-      #{picUrl,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, #{sortOrder,jdbcType=TINYINT}, 
-      #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
+      #{picUrl,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, null,
+      now(), now(), false
       )
   </insert>
   <insert id="insertSelective" parameterType="com.springboot.bean.shop.MallCategory">
@@ -191,15 +200,12 @@
     update cskaoyan_mall_category
     set name = #{name,jdbcType=VARCHAR},
       keywords = #{keywords,jdbcType=VARCHAR},
-      desc = #{desc,jdbcType=VARCHAR},
+      `desc` = #{desc,jdbcType=VARCHAR},
       pid = #{pid,jdbcType=INTEGER},
       icon_url = #{iconUrl,jdbcType=VARCHAR},
       pic_url = #{picUrl,jdbcType=VARCHAR},
-      level = #{level,jdbcType=VARCHAR},
-      sort_order = #{sortOrder,jdbcType=TINYINT},
-      add_time = #{addTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      deleted = #{deleted,jdbcType=BIT}
+      `level` = #{level,jdbcType=VARCHAR},
+      update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

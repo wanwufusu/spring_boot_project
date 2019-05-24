@@ -31,4 +31,19 @@ public class ShopCategoryServiceImpl implements ShopCategoryService {
     public List<CategoryName> queryL1Categorys() {
         return mallCategoryMapper.selectL1Categorys();
     }
+
+    @Override
+    public int insertCategory(MallCategory mallCategory) {
+        return mallCategoryMapper.insert(mallCategory);
+    }
+
+    @Override
+    public void deleteCategoryById(Integer id) {
+        mallCategoryMapper.logicDeleteCategoryById(id);
+    }
+
+    @Override
+    public int update(MallCategory mallCategory) {
+        return mallCategoryMapper.updateByPrimaryKey(mallCategory);
+    }
 }

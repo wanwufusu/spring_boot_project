@@ -1,13 +1,14 @@
 package com.springboot.bean.shop;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
 public class MallCategory {
     private Integer id;//
-
+    @NotNull
     private String name;//
-
+    @NotNull
     private String keywords;//
 
     private String desc;//
@@ -17,6 +18,16 @@ public class MallCategory {
     private String picUrl;//
 
     private String level;//
+
+    private int pid;
+
+    public int getPid() {
+        return pid;
+    }
+
+    public void setPid(int pid) {
+        this.pid = pid;
+    }
 
     private List<MallCategory> children;
 

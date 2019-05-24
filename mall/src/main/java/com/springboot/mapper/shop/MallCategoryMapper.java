@@ -21,4 +21,6 @@ public interface MallCategoryMapper {
     List<MallCategory> selectAllCategorys();
 
     List<CategoryName> selectL1Categorys();
+
+    void logicDeleteCategoryById(Integer id);
 }

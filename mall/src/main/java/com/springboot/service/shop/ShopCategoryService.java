@@ -9,4 +9,10 @@ public interface ShopCategoryService {
     List<MallCategory> queryAllCategorys();
 
     List<CategoryName> queryL1Categorys();
+
+    int insertCategory(MallCategory mallCategory);
+
+    void deleteCategoryById(Integer id);
+
+    int update(MallCategory mallCategory);
 }
