@@ -102,7 +102,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.springboot.bean.admin.Role">
-    insert into cskaoyan_mall_role (id, name, desc, 
+    insert into cskaoyan_mall_role (id, `name`, `desc`,
       enabled, add_time, update_time, 
       deleted)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
@@ -116,10 +116,10 @@
         id,
       </if>
       <if test="name != null">
-        name,
+        `name`,
       </if>
       <if test="desc != null">
-        desc,
+        `desc`,
       </if>
       <if test="enabled != null">
         enabled,

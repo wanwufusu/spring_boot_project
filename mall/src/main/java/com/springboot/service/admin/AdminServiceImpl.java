@@ -26,8 +26,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public boolean addAdmin(Admin admin) {
-        Admin check = adminMapper.selectByPrimaryKey(admin.getId());
-        if(check == null){
+        List<Admin> check = adminMapper.findAdminByName(admin.getUsername());
+        if(check.size() == 0){
             adminMapper.insert(admin);
             return true;
         }
