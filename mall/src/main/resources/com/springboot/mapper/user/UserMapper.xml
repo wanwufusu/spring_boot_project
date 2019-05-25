@@ -31,6 +31,12 @@
     <select id="QueryUsersByUsername" resultMap="BaseResultMap">
         select <include refid="Base_Column_List" /> from cskaoyan_mall_user where username like "%"#{username}"%" order by ${sort} ${order} limit #{offset},#{limit}
     </select>
+    <!--用于订单详情-->
+    <select id="queryUserById" resultMap="BaseResultMap">
+        select id, avatar
+        <include refid="Base_Column_List" />
+        from cskaoyan_mall_user where id = #{id}
+    </select>
     <select id="findCount" resultType="_int">
         select count(*) from cskaoyan_mall_user
     </select>
