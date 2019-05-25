@@ -14,4 +14,8 @@ public interface StorageService {
     List<Storage> findStorageByKeyAndName(String key, String name, int limit, int offset);
 
     boolean addStorage(Storage storage);
+
+    boolean update(Storage storage);
+
+    boolean delete(Storage storage);
 }

@@ -58,4 +58,24 @@ public class StorageController {
             return new ResponseVp(0,null,"对象已存在");
         }
     }*/
+    @RequestMapping("update")
+    @ResponseBody
+    public ResponseVp update(@RequestBody Storage storage){
+        boolean flag = storageService.update(storage);
+        if(flag){
+            return new ResponseVp(0,storage,"成功");
+        }else {
+            return null;
+        }
+    }
+    @RequestMapping("delete")
+    @ResponseBody
+    public ResponseVp delete(@RequestBody Storage storage){
+        boolean flag = storageService.delete(storage);
+        if(flag){
+            return new ResponseVp(0,null,"成功");
+        }else {
+            return null;
+        }
+    }
 }
