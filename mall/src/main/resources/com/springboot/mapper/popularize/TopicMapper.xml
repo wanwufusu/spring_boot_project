@@ -11,7 +11,7 @@
     <result column="read_count" jdbcType="VARCHAR" property="readCount" />
     <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
     <result column="sort_order" jdbcType="INTEGER" property="sortOrder" />
-    <result column="goods" jdbcType="VARCHAR" property="goods" />
+    <result column="goods" jdbcType="VARCHAR" property="goods" typeHandler="com.springboot.handler.StringArrayHandler"/>
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
@@ -69,7 +69,7 @@
       )
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{subtitle,jdbcType=VARCHAR},
       #{price,jdbcType=DECIMAL}, #{readCount,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR},
-      #{sortOrder,jdbcType=INTEGER}, #{goods,jdbcType=VARCHAR}, now(),
+      #{sortOrder,jdbcType=INTEGER}, #{goods,jdbcType=VARCHAR,typeHandler=com.springboot.handler.StringArrayHandler}, now(),
       now(), #{deleted,jdbcType=BIT}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
@@ -96,7 +96,7 @@
         sort_order = #{sortOrder,jdbcType=INTEGER},
       </if>
       <if test="goods != null">
-        goods = #{goods,jdbcType=VARCHAR},
+        goods = #{goods,jdbcType=VARCHAR,typeHandler=com.springboot.handler.StringArrayHandler},
       </if>
       <if test="addTime != null">
         add_time = #{addTime,jdbcType=TIMESTAMP},

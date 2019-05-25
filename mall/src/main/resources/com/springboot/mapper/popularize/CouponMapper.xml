@@ -14,7 +14,8 @@
         <result column="type" jdbcType="SMALLINT" property="type" />
         <result column="status" jdbcType="SMALLINT" property="status" />
         <result column="goods_type" jdbcType="SMALLINT" property="goodsType" />
-        <result column="goods_value" jdbcType="VARCHAR" property="goodsValue" />
+        <result column="goods_value" jdbcType="VARCHAR" property="goodsValue"
+                typeHandler='com.springboot.handler.StringArrayHandler'/>
         <result column="code" jdbcType="VARCHAR" property="code" />
         <result column="time_type" jdbcType="SMALLINT" property="timeType" />
         <result column="days" jdbcType="SMALLINT" property="days" />
@@ -74,7 +75,7 @@
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR},
       #{tag,jdbcType=VARCHAR}, #{total,jdbcType=INTEGER}, #{discount,jdbcType=DECIMAL},
       #{min,jdbcType=DECIMAL}, #{limit,jdbcType=SMALLINT}, #{type,jdbcType=SMALLINT},
-      #{status,jdbcType=SMALLINT}, #{goodsType,jdbcType=SMALLINT}, #{goodsValue,jdbcType=VARCHAR},
+      #{status,jdbcType=SMALLINT}, #{goodsType,jdbcType=SMALLINT}, #{goodsValue,jdbcType=VARCHAR, typeHandler=com.springboot.handler.StringArrayHandler},
       #{code,jdbcType=VARCHAR}, #{timeType,jdbcType=SMALLINT}, #{days,jdbcType=SMALLINT},
       #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, now(),
       now(), #{deleted,jdbcType=BIT})
@@ -114,7 +115,7 @@
                 goods_type = #{goodsType,jdbcType=SMALLINT},
             </if>
             <if test="goodsValue != null">
-                goods_value = #{goodsValue,jdbcType=VARCHAR},
+                goods_value = #{goodsValue,jdbcType=VARCHAR, typeHandler=com.springboot.handler.StringArrayHandler},
             </if>
             <if test="code != null">
                 code = #{code,jdbcType=VARCHAR},

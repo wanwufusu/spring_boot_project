@@ -26,7 +26,7 @@ public class MallCoupon {
 
     private Short goodsType;
 
-    private String goodsValue;
+    private String[] goodsValue;
 
     private String code;
 
@@ -132,13 +132,18 @@ public class MallCoupon {
         this.goodsType = goodsType;
     }
 
-    public String getGoodsValue() {
+    public String[] getGoodsValue() {
         return goodsValue;
     }
 
+    public void setGoodsValue(String[] goodsValue) {
+        this.goodsValue = goodsValue;
+    }
+/*
     public void setGoodsValue(String goodsValue) {
         this.goodsValue = goodsValue == null ? null : goodsValue.trim();
     }
+*/
 
     public String getCode() {
         return code;
