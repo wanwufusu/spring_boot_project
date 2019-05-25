@@ -14,9 +14,9 @@ public class TopicServiceImpl implements TopicService {
     TopicMapper mapper;
 
     @Override
-    public Result findlist(PageDetail pageDetail) {
+    public Result findlist(PageDetail pageDetail,String title,String subtitle) {
         pageDetail.setOffset();
-        return new Result<>(mapper.findList(pageDetail),mapper.countList());
+        return new Result<>(mapper.findList(pageDetail,title,subtitle),mapper.countList(title,subtitle));
     }
 
 

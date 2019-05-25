@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface MallAdMapper {
 
-    List<MallAd> findList(PageDetail pageDetail);
+    List<MallAd> findList(@Param("page") PageDetail pageDetail,@Param("name") String name,@Param("content") String content);
 
-    int countList();
+    int countList(@Param("name") String name,@Param("content") String content);
 
     /**
      * 返回插入内容自己产生的ID

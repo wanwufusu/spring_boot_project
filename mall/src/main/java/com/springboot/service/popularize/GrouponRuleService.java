@@ -6,7 +6,7 @@ import com.springboot.bean.util.Result;
 
 public interface GrouponRuleService {
 
-    Result findList(PageDetail pageDetail);
+    Result findList(PageDetail pageDetail,Integer goodsId);
 
     MallGrouponRules add(MallGrouponRules ad);
 

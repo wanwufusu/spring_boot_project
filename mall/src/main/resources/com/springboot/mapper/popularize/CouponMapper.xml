@@ -33,11 +33,34 @@
 
     <select id="findList" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"/>
-        from cskaoyan_mall_coupon order by #{sort} #{order} limit #{offset},#{limit}
+        from cskaoyan_mall_coupon
+        <where>
+            <if test="name!=null">
+                and `name` like '%${name}%'
+            </if>
+            <if test="type!=null">
+                and `type` like '%${type}%'
+            </if>
+            <if test="status!=null">
+                and `status` like '%${status}%'
+            </if>
+        </where>
+        order by #{page.sort} #{page.order} limit #{page.offset},#{page.limit}
     </select>
 
     <select id="countList" resultType="_int">
     select count(id) from cskaoyan_mall_coupon
+        <where>
+            <if test="name!=null">
+                and `name` like '%${name}%'
+            </if>
+            <if test="type!=null">
+                and `type` like '%${type}%'
+            </if>
+            <if test="status!=null">
+                and status like '%${status}%'
+            </if>
+        </where>
     </select>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.springboot.bean.popularize.MallCoupon" >

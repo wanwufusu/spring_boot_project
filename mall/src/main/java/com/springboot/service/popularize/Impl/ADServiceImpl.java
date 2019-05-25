@@ -17,10 +17,10 @@ public class ADServiceImpl implements ADService {
 
 
     @Override
-    public Result findList(PageDetail pageDetail) {
+    public Result findList(PageDetail pageDetail,String name,String content) {
         pageDetail.setOffset();
-        List list = mapper.findList(pageDetail);
-        Result<Object> result = new Result<>(list,mapper.countList());
+        List list = mapper.findList(pageDetail,name,content);
+        Result<Object> result = new Result<>(list,mapper.countList(name,content));
         return result;
     }
 

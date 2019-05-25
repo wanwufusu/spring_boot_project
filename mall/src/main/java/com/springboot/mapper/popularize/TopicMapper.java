@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface TopicMapper {
 
-    List findList (PageDetail pageDetail);
+    List findList (@Param("page") PageDetail pageDetail,@Param("title") String title,@Param("subtitle") String subtitle);
 
-    int countList();
+    int countList(@Param("title") String title,@Param("subtitle") String subtitle);
 
     int insert (MallTopic topic);
 

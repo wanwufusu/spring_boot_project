@@ -24,11 +24,28 @@
 
   <select id="findList" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>
-    from cskaoyan_mall_ad order by #{sort} #{order} limit #{offset},#{limit}
+    from cskaoyan_mall_ad
+    <where>
+        <if test="name!=null">
+          and `name` like '%${name}%'
+        </if>
+        <if test="content!=null">
+          and content like '%${content}%'
+        </if>
+    </where>
+    order by #{page.sort} #{page.order} limit #{page.offset},#{page.limit}
   </select>
 
   <select id="countList" resultType="_int">
     select count(id) from cskaoyan_mall_ad
+    <where>
+      <if test="name!=null">
+        and `name` like '%${name}%'
+      </if>
+      <if test="content!=null">
+        and content like '%${content}%'
+      </if>
+  </where>
   </select>
 
   <!--把产生的主键返回到MallAd的id属性-->

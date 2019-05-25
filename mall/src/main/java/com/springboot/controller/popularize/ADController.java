@@ -19,8 +19,9 @@ public class ADController {
     ADService service;
 
     @RequestMapping("list")
-    public ResponseVO grouponList(PageDetail pageDetail){
-        return new ResponseVO(service.findList(pageDetail),"成功",0);
+    public ResponseVO grouponList(PageDetail pageDetail,String name,String content){
+        ResponseVO vo = new ResponseVO(service.findList(pageDetail,name,content), "成功", 0);
+        return vo;
     }
 
     @RequestMapping("create")

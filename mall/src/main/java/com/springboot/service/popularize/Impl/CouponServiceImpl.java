@@ -8,15 +8,19 @@ import com.springboot.service.popularize.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CouponServiceImpl implements CouponService {
     @Autowired
     CouponMapper mapper;
 
     @Override
-    public Result findlist(PageDetail pageDetail) {
+    public Result findlist(PageDetail pageDetail,String name,Integer type,Integer status) {
         pageDetail.setOffset();
-        return new Result<>(mapper.findList(pageDetail),mapper.countList());
+        List list = mapper.findList(pageDetail, name, type, status);
+        int i = mapper.countList(name, type, status);
+        return new Result<>(list,i);
     }
 
     @Override

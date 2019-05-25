@@ -6,7 +6,7 @@ import com.springboot.bean.util.Result;
 
 public interface CouponService {
 
-    Result findlist(PageDetail pageDetail);
+    Result findlist(PageDetail pageDetail,String name,Integer type,Integer status);
 
     MallCoupon add(MallCoupon ad);
 

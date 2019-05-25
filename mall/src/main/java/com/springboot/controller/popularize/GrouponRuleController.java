@@ -17,8 +17,8 @@ public class GrouponRuleController {
     GrouponRuleService service;
 
     @RequestMapping("list")
-    public ResponseVO list(PageDetail pageDetail){
-        return new ResponseVO(service.findList(pageDetail),"成功",0);
+    public ResponseVO list(PageDetail pageDetail,Integer goodsId){
+        return new ResponseVO(service.findList(pageDetail,goodsId),"成功",0);
     }
 
     @RequestMapping("create")

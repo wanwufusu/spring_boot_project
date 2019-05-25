@@ -19,8 +19,8 @@ public class CouponController {
     CouponService service;
 
     @RequestMapping("list")
-    public ResponseVO couponlist(PageDetail pageDetail){
-        Result result = service.findlist(pageDetail);
+    public ResponseVO couponlist(PageDetail pageDetail,String name,Integer type,Integer status){
+        Result result = service.findlist(pageDetail,name,type,status);
         ResponseVO vo = new ResponseVO(result, "成功", 0);
         return vo;
     }

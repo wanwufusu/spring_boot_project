@@ -6,7 +6,7 @@ import com.springboot.bean.util.Result;
 
 public interface ADService {
 
-    Result findList(PageDetail pageDetail);
+    Result findList(PageDetail pageDetail,String name,String content);
 
     MallAd add(MallAd ad);
 

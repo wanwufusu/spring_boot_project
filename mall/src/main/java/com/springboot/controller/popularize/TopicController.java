@@ -20,8 +20,8 @@ public class TopicController {
 
     @RequestMapping("list")
     @ResponseBody
-    public ResponseVO topiclist(PageDetail pageDetail){
-        Result result = service.findlist(pageDetail);
+    public ResponseVO topiclist(PageDetail pageDetail,String title,String subtitle){
+        Result result = service.findlist(pageDetail,title,subtitle);
         ResponseVO vo = new ResponseVO(result, "成功", 0);
         return vo;
     }

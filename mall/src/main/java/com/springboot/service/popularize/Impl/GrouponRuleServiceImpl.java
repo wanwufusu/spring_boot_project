@@ -16,10 +16,10 @@ public class GrouponRuleServiceImpl implements GrouponRuleService {
     @Autowired
     GrouponRuleMapper mapper;
     @Override
-    public Result findList(PageDetail pageDetail) {
+    public Result findList(PageDetail pageDetail,Integer goodsId) {
         pageDetail.setOffset();
-        List list = mapper.findList(pageDetail);
-        return new Result<>(list, mapper.countList());
+        List list = mapper.findList(pageDetail,goodsId);
+        return new Result<>(list, mapper.countList(goodsId));
     }
 
     @Override

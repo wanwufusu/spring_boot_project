@@ -1,14 +1,17 @@
 package com.springboot.mapper.popularize;
 
+
+
 import com.springboot.bean.popularize.MallCoupon;
 import com.springboot.bean.util.PageDetail;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface CouponMapper {
-    List findList (PageDetail pageDetail);
+    List findList (@Param("page") PageDetail pageDetail, @Param("name") String name, @Param("type") Integer type, @Param("status") Integer status);
 
-    int countList();
+    int countList(@Param("name") String name, @Param("type") Integer type, @Param("status") Integer status);
 
     int insert (MallCoupon ad);
 

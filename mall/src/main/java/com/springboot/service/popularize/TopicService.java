@@ -6,7 +6,7 @@ import com.springboot.bean.util.Result;
 
 public interface TopicService {
 
-    Result findlist(PageDetail pageDetail);
+    Result findlist(PageDetail pageDetail,String title,String subtitle);
 
     MallTopic add(MallTopic ad);
 
