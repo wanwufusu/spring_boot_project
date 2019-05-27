@@ -1,21 +1,19 @@
 package com.springboot.controller.admin;
 
-import com.springboot.bean.admin.Data;
-import com.springboot.bean.admin.ResponseVo;
-import com.springboot.bean.admin.Role;
-import com.springboot.bean.admin.RoleData;
+import com.springboot.bean.admin.*;
 import com.springboot.bean.util.ResponseVO;
 import com.springboot.service.admin.RoleService;
 import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 @Controller
 @RequestMapping("role")
@@ -57,9 +55,39 @@ public class RoleController {
         }else {
             List<Role> roles = roleService.findRoleByName(username);
             Data<Role> roleData = new Data<>();
-            roleData.setItems(roles);
             roleData.setTotal(roles == null?0:roles.size());
+            roleData.setItems(roles);
             return new ResponseVo(0,roleData,"成功");
+        }
+    }
+    @RequestMapping("create")
+    @ResponseBody
+    public ResponseVp create(@RequestBody Role role){
+        boolean flag = roleService.addRole(role);
+        if (flag) {
+            return new ResponseVp(0,role,"成功");
+        }else {
+            return new ResponseVp(640,null,"角色已经存在");
+        }
+    }
+    @RequestMapping("update")
+    @ResponseBody
+    public ResponseVp update(@RequestBody Role role){
+        boolean flag = roleService.update(role);
+        if(flag){
+            return new ResponseVp(0,role,"成功");
+        }else {
+            return null;
+        }
+    }
+    @RequestMapping("delete")
+    @ResponseBody
+    public ResponseVp delete(@RequestBody Role role){
+        boolean flag = roleService.deleteRole(role);
+        if(flag){
+            return new ResponseVp(0,null,"成功");
+        }else {
+            return null;
         }
     }
 }

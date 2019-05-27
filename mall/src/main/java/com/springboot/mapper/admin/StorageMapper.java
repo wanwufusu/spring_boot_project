@@ -27,4 +27,12 @@ public interface StorageMapper {
     int updateByPrimaryKeySelective(Storage record);
 
     int updateByPrimaryKey(Storage record);
+
+    List<Storage> findStorageByPage(@Param("rows") int rows, @Param("offset") int offset);
+
+    List<Storage> findStorageByKey(@Param("key") String key, @Param("rows") int rows, @Param("offset") int offset);
+
+    List<Storage> findStorageByName(@Param("name") String name, @Param("rows") int rows, @Param("offset") int offset);
+
+    List<Storage> findStorageByKeyAndName(@Param("key") String key,@Param("name") String name, @Param("rows") int rows, @Param("offset") int offset);
 }

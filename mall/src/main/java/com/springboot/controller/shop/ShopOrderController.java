@@ -1,6 +1,7 @@
 package com.springboot.controller.shop;
 
 import com.springboot.bean.shop.MallOrder;
+import com.springboot.bean.shop.OrderDetail;
 import com.springboot.bean.util.PageDetail;
 import com.springboot.bean.util.ResponseVO;
 import com.springboot.bean.util.Result;
@@ -38,15 +39,15 @@ public class ShopOrderController {
     }
 
     @RequestMapping("detail")
-    public ResponseVO<Map<String, Object>> selectOrderById(String id){
-        MallOrder mallOrder = shopOrderService.selectOrderById(Integer.parseInt(id));
-        ResponseVO<Map<String, Object>> responseVO = new ResponseVO<>();
-        HashMap<String, Object> resultMap = new HashMap<>();
+    public ResponseVO<OrderDetail> selectOrderById(String id){
+        OrderDetail orderDetail = shopOrderService.selectOrderDetailById(Integer.parseInt(id));
+        ResponseVO<OrderDetail> responseVO = new ResponseVO<>();
+/*        HashMap<String, Object> resultMap = new HashMap<>();
         resultMap.put("order", mallOrder);
         resultMap.put("orderGoods", new String[]{});
-        resultMap.put("user", null);
+        resultMap.put("user", null);*/
         responseVO.setSuccessMsg();
-        responseVO.setData(resultMap);
+        responseVO.setData(orderDetail);
         return responseVO;
     }
 }

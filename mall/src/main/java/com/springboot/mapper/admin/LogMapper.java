@@ -27,4 +27,8 @@ public interface LogMapper {
     int updateByPrimaryKeySelective(Log record);
 
     int updateByPrimaryKey(Log record);
+
+    List<Log> findLogByPage(@Param("rows") int rows, @Param("offset") int offset);
+
+    List<Log> findLogByName(@Param("name") String username,@Param("rows") int rows,@Param("offset") int offset);
 }
