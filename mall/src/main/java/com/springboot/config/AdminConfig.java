@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.LinkedHashMap;
 
-//@Configuration
+@Configuration
 public class AdminConfig {
 
     /**
@@ -47,10 +47,10 @@ public class AdminConfig {
     public ShiroFilterFactoryBean shirFilter(DefaultWebSecurityManager securityManager) {
         ShiroFilterFactoryBean filterFactory = new ShiroFilterFactoryBean();
         filterFactory.setSecurityManager(securityManager);
-        filterFactory.setLoginUrl("登录成功的url");
-        filterFactory.setUnauthorizedUrl("未验证成功的url");
+        filterFactory.setLoginUrl("/admin/dashboard");
+        filterFactory.setUnauthorizedUrl("/admin/login");
         LinkedHashMap<String, String> filterMap = new LinkedHashMap<>();
-        filterMap.put("/admin/登录页面", "anon");
+        filterMap.put("/admin/login", "anon");
         filterMap.put("/admin/**", "authc");
         filterFactory.setFilterChainDefinitionMap(filterMap);
         return filterFactory;

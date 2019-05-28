@@ -23,6 +23,16 @@ public class Admin {
 
     private int[] roleIds;
 
+    private String permission;
+
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission;
+    }
+
     public String getLastLoginTime() {
         return lastLoginTime;
     }
@@ -99,13 +109,6 @@ public class Admin {
     }
 
 
-    /*public String[] getRoleIds() {
-        return roleIds;
-    }
-
-    public void setRoleIds(String[] roleIds) {
-        this.roleIds = roleIds;
-    }*/
 
     public int[] getRoleIds() {
         return roleIds;

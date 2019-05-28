@@ -1,10 +1,15 @@
 package com.springboot.controller;
 
 import com.springboot.bean.MallStorage;
+import com.springboot.bean.admin.Admin;
 import com.springboot.bean.util.ResponseVO;
 import com.springboot.bean.util.UpLoadUtil;
 import com.springboot.service.MainService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,21 +33,35 @@ public class MainController {
     /**
      * 用subject.login()登录
      *
-     * @param username
-     * @param password
      * @return
      */
     @RequestMapping(value = "auth/login")
-    public Map login(String username, String password){
-        HashMap<String, Object> loginResult = new HashMap<>();
+    public ResponseVO login(@RequestBody Admin admin) {
+/*        HashMap<String, Object> loginResult = new HashMap<>();
         //loginResult.put("data", "2fcc8519-2447-427a-ba05-c7d84bd36c32");
         loginResult.put("errmsg", "成功");
         loginResult.put("errno", 0);
-        return loginResult;
+        return loginResult;*/
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(admin.getUsername(), admin.getPassword());
+        try {
+            subject.login(token);
+            return new ResponseVO<>(token, "登录成功", 0);
+        } catch (Exception e) {
+            return new ResponseVO(null, "用户名或密码错误", -1);
+        }
     }
 
+
+    /**
+     * 该死的前端
+     *
+     * @param token
+     * @return
+     */
     @RequestMapping(value = "auth/info")
-    public Map loginInfo(){
+    public Map loginInfo(UsernamePasswordToken token){
+
         HashMap<String, Object> loginToken = new HashMap<>();
         HashMap<String, Object> data = new HashMap<>();
         data.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");

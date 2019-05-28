@@ -6,6 +6,7 @@ import com.springboot.service.admin.AdminService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class AdminRealm extends AuthorizingRealm {
     }
 
     /**
-     * ❤授权方法❤
+     * ☢授权方法☣
      *
      * @param principalCollection
      * @return
@@ -40,7 +41,7 @@ public class AdminRealm extends AuthorizingRealm {
         Admin admin = (Admin) principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         //这里需要获取role角色  admin需要role
-        return null;
+        return info;
     }
 
     /**
