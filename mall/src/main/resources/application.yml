@@ -18,3 +18,5 @@ spring:
     static-path-pattern: /storage/**
   resources:
     static-locations: file:e:/storage/
+  jackson:
+    default-property-inclusion: non_null

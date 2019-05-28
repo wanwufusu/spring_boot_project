@@ -45,6 +45,11 @@
     ORDER BY ${pageDetail.sort} ${pageDetail.order}
     limit #{pageDetail.limit} offset #{pageDetail.offset}
   </select>
+  <select id="selectBrands" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cskaoyan_mall_brand
+  </select>
   <select id="selectAllRecords" parameterType="java.lang.Integer" resultType="_int">
     select
     count(*)
