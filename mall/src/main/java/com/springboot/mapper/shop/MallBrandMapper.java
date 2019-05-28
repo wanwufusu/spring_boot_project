@@ -2,6 +2,8 @@ package com.springboot.mapper.shop;
 
 import com.springboot.bean.util.PageDetail;
 import com.springboot.bean.shop.MallBrand;
+import com.springboot.bean.util.Result;
+import com.springboot.bean.wx.WeChatIndex;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -30,4 +32,7 @@ public interface MallBrandMapper {
     int selectAllRecordsByConditions(@Param("conditions")Map conditions);
 
     void logicDeleteBrandById(Integer id);
+
+
+    List<MallBrand> selectBrands();
 }

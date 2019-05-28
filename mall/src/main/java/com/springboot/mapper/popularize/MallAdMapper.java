@@ -22,4 +22,6 @@ public interface MallAdMapper {
     int update(MallAd ad);
 
     int deleteById(int id);
+
+    List<MallAd> findAllAd();
 }

@@ -36,6 +36,11 @@
     order by #{page.sort} #{page.order} limit #{page.offset},#{page.limit}
   </select>
 
+  <select id="findAllAd" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from cskaoyan_mall_ad
+  </select>
+
   <select id="countList" resultType="_int">
     select count(id) from cskaoyan_mall_ad
     <where>
