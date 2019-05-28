@@ -1,5 +1,6 @@
 package com.springboot.controller;
 
+import com.google.gson.Gson;
 import com.springboot.bean.MallStorage;
 import com.springboot.bean.admin.Admin;
 import com.springboot.bean.util.ResponseVO;
@@ -37,16 +38,11 @@ public class MainController {
      */
     @RequestMapping(value = "auth/login")
     public ResponseVO login(@RequestBody Admin admin) {
-/*        HashMap<String, Object> loginResult = new HashMap<>();
-        //loginResult.put("data", "2fcc8519-2447-427a-ba05-c7d84bd36c32");
-        loginResult.put("errmsg", "成功");
-        loginResult.put("errno", 0);
-        return loginResult;*/
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(admin.getUsername(), admin.getPassword());
         try {
             subject.login(token);
-            return new ResponseVO<>(token, "登录成功", 0);
+            return new ResponseVO<>(token.getUsername(), "成功", 0);
         } catch (Exception e) {
             return new ResponseVO(null, "用户名或密码错误", -1);
         }
@@ -56,11 +52,12 @@ public class MainController {
     /**
      * 该死的前端
      *
-     * @param token
      * @return
      */
     @RequestMapping(value = "auth/info")
-    public Map loginInfo(UsernamePasswordToken token){
+    public ResponseVO loginInfo(HttpServletRequest request) {
+        String header = request.getHeader("X-Litemall-Admin-Token");
+        Gson gson = new Gson();
 
         HashMap<String, Object> loginToken = new HashMap<>();
         HashMap<String, Object> data = new HashMap<>();
@@ -73,10 +70,8 @@ public class MainController {
         data.put("name", "admin123");
         data.put("perms", strings);
         data.put("roles", strings2);
-        loginToken.put("data", data);
-        loginToken.put("errmsg", "成功");
-        loginToken.put("errno", 0);
-        return loginToken;
+
+        return new ResponseVO(data, "成功", 0);
     }
 
     /**
