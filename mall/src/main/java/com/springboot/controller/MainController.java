@@ -25,6 +25,13 @@ public class MainController {
         return "hello";
     }
 
+    /**
+     * 用subject.login()登录
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     @RequestMapping(value = "auth/login")
     public Map login(String username, String password){
         HashMap<String, Object> loginResult = new HashMap<>();
