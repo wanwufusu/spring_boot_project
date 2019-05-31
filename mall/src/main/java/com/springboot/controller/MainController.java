@@ -10,6 +10,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,9 @@ public class MainController {
     @Autowired
     MainService mainService;
 
+    Subject subject;
+
+
     @RequestMapping("hello")
     public String testHello(){
         return "hello";
@@ -38,7 +42,7 @@ public class MainController {
      */
     @RequestMapping(value = "auth/login")
     public ResponseVO login(@RequestBody Admin admin) {
-        Subject subject = SecurityUtils.getSubject();
+        subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(admin.getUsername(), admin.getPassword());
         try {
             subject.login(token);
@@ -46,6 +50,12 @@ public class MainController {
         } catch (Exception e) {
             return new ResponseVO(null, "用户名或密码错误", -1);
         }
+    }
+
+    @RequestMapping("auth/logout")
+    public ResponseVO logout() {
+        subject.logout();
+        return new ResponseVO(null, "注销", 0);
     }
 
 
@@ -56,8 +66,8 @@ public class MainController {
      */
     @RequestMapping(value = "auth/info")
     public ResponseVO loginInfo(HttpServletRequest request) {
-        String header = request.getHeader("X-Litemall-Admin-Token");
-        Gson gson = new Gson();
+ /*       String header = request.getHeader("X-Litemall-Admin-Token");
+        Gson gson = new Gson();*/
 
         HashMap<String, Object> loginToken = new HashMap<>();
         HashMap<String, Object> data = new HashMap<>();
@@ -73,6 +83,7 @@ public class MainController {
 
         return new ResponseVO(data, "成功", 0);
     }
+
 
     /**
      * 空的仪表盘，为了让它不报错

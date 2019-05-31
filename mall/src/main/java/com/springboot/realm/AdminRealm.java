@@ -57,11 +57,9 @@ public class AdminRealm extends AuthorizingRealm {
         String username = uptoken.getUsername();
         String password = new String(uptoken.getPassword());
         Admin user = service.findAdminByName(username).get(0);
-        /*
-        省略给密码加密加盐
-        password = new Md5Hash(password,user.getUserName(),2).toString()
-        1）输入密码  2）盐   3）加密次数
-         */
+
+        password = new Md5Hash(password, user.getUsername(), 2).toString();
+
         if (user != null && user.getPassword().equals(password)) {
             return new SimpleAuthenticationInfo(user, user.getPassword(), this.getName());
             //返回user
