@@ -5,3 +5,4 @@
 *.iml
 *.ipr
 /mall/src/main/resources/logback.xml
+/mapper
