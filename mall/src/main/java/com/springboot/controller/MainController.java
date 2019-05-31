@@ -8,6 +8,7 @@ import com.springboot.bean.util.UpLoadUtil;
 import com.springboot.service.MainService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -43,6 +44,7 @@ public class MainController {
     @RequestMapping(value = "auth/login")
     public ResponseVO login(@RequestBody Admin admin) {
         subject = SecurityUtils.getSubject();
+        admin.setPassword(new Md5Hash(admin.getPassword(), admin.getUsername(), 2).toString());
         UsernamePasswordToken token = new UsernamePasswordToken(admin.getUsername(), admin.getPassword());
         try {
             subject.login(token);
