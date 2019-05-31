@@ -2,6 +2,7 @@ package com.springboot.mapper.goods;
 
 import com.springboot.bean.goods.MallGoods;
 import com.springboot.bean.util.PageDetail;
+import com.springboot.bean.wx.FloorGoods;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.HashMap;
@@ -26,4 +27,6 @@ public interface MallGoodsMapper {
                                                     @Param("conditions")HashMap<String, Object> conditions);
 
     int selectAllRecordsByConditions(@Param("conditions")HashMap<String, Object> conditions);
+
+    List<FloorGoods> selectFloorGoods();
 }

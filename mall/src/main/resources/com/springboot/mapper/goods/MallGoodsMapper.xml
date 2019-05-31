@@ -23,6 +23,12 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
   </resultMap>
+  <resultMap id="FloorGoodsMap" type="com.springboot.bean.wx.FloorGoods">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <collection property="goodsList" column="id" select="com.springboot.mapper.goods.MallGoodsMapper
+    .selectOneFloorGoodsByCategoryIdAndLevel1"/>
+  </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.springboot.bean.goods.MallGoods">
     <result column="detail" jdbcType="LONGVARCHAR" property="detail" />
   </resultMap>
@@ -68,6 +74,24 @@
       </if>
     </where>
   </select>
+  <select id="selectFloorGoods" resultMap="FloorGoodsMap">
+    select
+      id,`name`
+    from cskaoyan_mall_category
+    where
+    `level` = 'L1'
+  </select>
+  <select id="selectOneFloorGoodsByCategoryIdAndLevel1" resultType="com.springboot.bean.goods.MallGoods">
+    select
+    id, `name`, brief,
+    pic_url, is_new, is_hot, counter_price, retail_price
+    from cskaoyan_mall_goods g, cskaoyan_mall_category clevel2
+    where clevel2.pid = 1
+    limit 1
+  </select>
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cskaoyan_mall_goods
     where id = #{id,jdbcType=INTEGER}

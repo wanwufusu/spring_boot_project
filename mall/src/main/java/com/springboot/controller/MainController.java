@@ -48,6 +48,7 @@ public class MainController {
             subject.login(token);
             return new ResponseVO<>(token.getUsername(), "成功", 0);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseVO(null, "用户名或密码错误", -1);
         }
     }

@@ -35,4 +35,5 @@ public class WeChatIndexController {
         responseVO.setSuccessMsg();
         return responseVO;
     }
+
 }

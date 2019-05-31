@@ -20,4 +20,6 @@ public interface CouponMapper {
     int deleteById(int id);
 
     MallCoupon findById(int id);
+
+    List<MallCoupon> findAllCoupon();
 }
